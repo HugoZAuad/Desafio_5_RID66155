@@ -1,9 +1,11 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
+import { errors } from 'celebrate';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import 'express-async-errors';
 import { AppDataSource } from '../../../config/database';
 import BooksRoutes from '@modules/books/infra/http/routes/BooksRoutes';
+import ErrorHandleMiddleware from '@shared/middlewares/ErrorHandleMiddleware';
 
 dotenv.config();
 
@@ -21,18 +23,22 @@ AppDataSource.initialize()
 app.use(cors());
 app.use(express.json());
 
-
 app.use('/livros', BooksRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('API de Livros funcionando!');
 });
 
+app.use(errors());
+
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err);
-  res.status(500).json({ message: err.message || 'Erro interno do servidor' });
+  ErrorHandleMiddleware.handleError(err, req, res, next);
 });
 
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+  });
+}
+
+export default app;

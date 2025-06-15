@@ -17,6 +17,10 @@ export class BookRepositories implements IBookRepository {
     return await this.repository.save(book);
   }
 
+  async findById(id: number): Promise<IBook | null> {
+    return await this.repository.findOneBy({id});
+  }
+
   async findAll(): Promise<IBook[]> {
     return await this.repository.find();
   }

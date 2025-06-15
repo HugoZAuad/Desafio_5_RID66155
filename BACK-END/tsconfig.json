@@ -12,7 +12,7 @@
       "@services/*": ["src/modules/books/services/*"],
       "@shared/*": ["src/shared/*"],
       "@modules/*": ["src/modules/*"],
-      "@middlewares/*": ["src/shared/middlewares/*"],
+      "@middlewares/*": ["src/shared/middlewares/*"]
     },
     "typeRoots": ["node_modules/@types", "src/@types"],
     "resolveJsonModule": true,

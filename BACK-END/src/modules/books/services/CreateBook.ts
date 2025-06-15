@@ -1,4 +1,4 @@
-import { ICreateBookService } from '../models/services/ICreateBookService';
+import { ICreateBookService } from '../models/service/ICreateBookService';
 import { ICreateBook } from '../models/interfaces/ICreateBook';
 import { IBook } from '../models/interfaces/IBook';
 import { IBookRepository } from '../models/repositories/IBookRepository';
@@ -12,6 +12,10 @@ export class CreateBook implements ICreateBookService {
   }
 
   async execute(data: ICreateBook): Promise<IBook> {
+    // Validação extra de negócio (exemplo)
+    if (!data.titulo || !data.pages || !data.ISBN || !data.editora) {
+      throw new AppError('Dados obrigatórios não informados.', 400);
+    }
     try {
       const book = await this.bookRepository.create(data);
       return book;

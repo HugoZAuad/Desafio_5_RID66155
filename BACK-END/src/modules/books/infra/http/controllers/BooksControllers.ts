@@ -24,11 +24,12 @@ export class BooksControllers {
   async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const updateBook = new UpdateBook(bookRepository);
-    const book = await updateBook.execute(Number(id), request.body);
-    if (!book) {
+    const result = await updateBook.execute(Number(id), request.body);
+    if (!result) {
       return response.status(404).json({ message: 'Book not found' });
     }
-    return response.json(book);
+    // Retorna mensagem personalizada para o front-end
+    return response.json(result);
   }
 
   async delete(request: Request, response: Response): Promise<Response> {
@@ -38,6 +39,6 @@ export class BooksControllers {
     if (!result) {
       return response.status(404).json({ message: 'Book not found' });
     }
-    return response.status(204).send();
+    return response.json(result);
   }
 }
