@@ -2,8 +2,8 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import 'express-async-errors';
-import { AppDataSource } from './config/database';
-import BooksRoutes from './routes/BooksRoutes';
+import { AppDataSource } from '../../../config/database';
+import BooksRoutes from '@modules/books/infra/http/routes/BooksRoutes';
 
 dotenv.config();
 
