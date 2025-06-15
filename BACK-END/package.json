@@ -13,7 +13,7 @@
     "format": "prettier --write 'src/**/*.{ts,tsx,json,md}'",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "migration:create": "node scripts/createMigration.js",
-    "migration:run": "cross-env ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d src/config/database.ts"
+    "migration:run": "cross-env ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/config/database.ts"
   },
   "keywords": [],
   "author": "",
