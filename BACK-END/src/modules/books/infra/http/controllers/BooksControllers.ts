@@ -21,6 +21,15 @@ export class BooksControllers {
     return response.json(books);
   }
 
+  async getById(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const book = await bookRepository.findById(Number(id));
+    if (!book) {
+      return response.status(404).json({ message: 'Book not found' });
+    }
+    return response.json(book);
+  }
+
   async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const updateBook = new UpdateBook(bookRepository);

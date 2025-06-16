@@ -53,4 +53,16 @@ router.delete(
   }
 );
 
+router.get(
+  '/:id',
+  celebrate({ [Segments.PARAMS]: idParamSchema }),
+  async (req, res, next) => {
+    try {
+      await controller.getById(req, res);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 export default router;
